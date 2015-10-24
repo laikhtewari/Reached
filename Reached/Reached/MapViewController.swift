@@ -12,6 +12,7 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate
 {
+    var name: String!
     var address: String!
     var phoneNumber: String!
     let locationManager = CLLocationManager()
@@ -101,29 +102,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("ENTERED REGION")
+        let myEntryMessage = "\(name) has arrived at \(address)."
+        textWithMessage(myEntryMessage)
+    }
+    
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("EXITED REGION")
+        let myExitMessage = "\(name) has left \(address)."
+        textWithMessage(myExitMessage)
+    }
+    
+    func textWithMessage( message: String )
+    {
         let request = NSMutableURLRequest(URL: NSURL(string: "https://textbelt.com/text")!)
         request.HTTPMethod = "POST"
-        let postString = "number=" + phoneNumber! + "&message=Entered geofence"
+        let postString = "number=" + phoneNumber! + "&message=" + message
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
-            
-            if error != nil {
-                print("error=\(error)")
-                return
-            }
-            
-            print("response = \(response)")
+
+            print("RESPONSE = \(response)")
             
             let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
             print("responseString = \(responseString)")
         }
         task.resume()
     }
-    
-    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
-        print("EXITED REGION")
-    }
-
 }
 

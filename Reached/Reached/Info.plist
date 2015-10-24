@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Reached requires access to your phone's location to notify you when you enter or leave a geofence</string>
+	<string>Reached requires access to your phone&apos;s location to send a text message when you enter or leave a geofence</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

@@ -12,7 +12,9 @@ class EnteringViewController: UIViewController {
 
     @IBOutlet weak var phoneTextField: UITextField!
     
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,15 +22,23 @@ class EnteringViewController: UIViewController {
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: "didTapView")
         self.view.addGestureRecognizer(tapRecognizer)
+    
+        if let name = defaults.objectForKey("name") as? String
+        {
+            self.nameTextField.text = name
+        }
 
         // Do any additional setup after loading the view.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
+        defaults.setObject(nameTextField.text, forKey: "name")
+        
         let destinationViewController: MapViewController = segue.destinationViewController as! MapViewController
         destinationViewController.address = self.addressTextField.text
         destinationViewController.phoneNumber = self.phoneTextField.text
+        destinationViewController.name = self.nameTextField.text
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,16 +46,12 @@ class EnteringViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    @IBAction func goButtonClicked(sender: AnyObject)
-    {
-        
-    }
     
     func didTapView()
     {
         self.view.endEditing(true)
     }
+    
     
     /*
     // MARK: - Navigation
@@ -53,7 +59,7 @@ class EnteringViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        // Pass the selected object to the new view controlle
     }
     */
 

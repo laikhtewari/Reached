@@ -18,35 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone #" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-cm-tdm">
-                                <rect key="frame" x="201" y="227" width="200" height="44"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-cm-tdm">
+                                <rect key="frame" x="163" y="201" width="275" height="44"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="ARS-6X-Ivq"/>
-                                    <constraint firstAttribute="height" constant="44" id="NIs-Yg-wGX"/>
+                                    <constraint firstAttribute="height" constant="44" id="XHH-qJ-iHa"/>
+                                    <constraint firstAttribute="width" constant="275" id="ZoN-Ek-zzA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="h2y-nN-21q">
-                                <rect key="frame" x="201" y="347" width="200" height="44"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Your Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lLe-MM-Gjl">
+                                <rect key="frame" x="163" y="97" width="275" height="44"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="AYh-bz-mag"/>
-                                    <constraint firstAttribute="height" constant="44" id="Qda-a1-Smx"/>
+                                    <constraint firstAttribute="width" constant="275" id="EIb-lN-GHQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="vuD-Ad-Ald"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="h2y-nN-21q">
+                                <rect key="frame" x="163" y="149" width="275" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="8jS-6h-vYA"/>
+                                    <constraint firstAttribute="height" constant="44" id="Etk-ge-y9n"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sf4-Ay-Y7p">
-                                <rect key="frame" x="277" y="474" width="46" height="30"/>
+                                <rect key="frame" x="285" y="285" width="30" height="30"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="aYQ-my-Vz0"/>
-                                </constraints>
                                 <state key="normal" title="Go"/>
                                 <connections>
-                                    <action selector="goButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Axh-Rn-ohn"/>
                                     <segue destination="MTd-id-Hzj" kind="presentation" id="IFs-uB-ZV8"/>
                                 </connections>
                             </button>
@@ -54,16 +60,20 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mEz-cm-tdm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1G0-pp-fOc"/>
-                            <constraint firstItem="mEz-cm-tdm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="207" id="52P-iW-hpA"/>
-                            <constraint firstItem="sf4-Ay-Y7p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LrC-uI-XdF"/>
-                            <constraint firstItem="h2y-nN-21q" firstAttribute="centerX" secondItem="mEz-cm-tdm" secondAttribute="centerX" id="w9T-ok-9Cd"/>
-                            <constraint firstItem="sf4-Ay-Y7p" firstAttribute="top" secondItem="h2y-nN-21q" secondAttribute="bottom" constant="83" id="wtY-4V-yCE"/>
-                            <constraint firstItem="h2y-nN-21q" firstAttribute="top" secondItem="mEz-cm-tdm" secondAttribute="bottom" constant="76" id="z3H-do-qZT"/>
+                            <constraint firstItem="sf4-Ay-Y7p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AnG-oj-W1L"/>
+                            <constraint firstItem="mEz-cm-tdm" firstAttribute="top" secondItem="h2y-nN-21q" secondAttribute="bottom" constant="8" id="QJl-hA-BQx"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sf4-Ay-Y7p" secondAttribute="bottom" constant="285" id="TTd-EQ-v6d"/>
+                            <constraint firstItem="h2y-nN-21q" firstAttribute="top" secondItem="lLe-MM-Gjl" secondAttribute="bottom" constant="8" id="U4L-ed-LfK"/>
+                            <constraint firstItem="mEz-cm-tdm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WxP-nc-KJU"/>
+                            <constraint firstItem="lLe-MM-Gjl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="77" id="cRo-7F-Pke"/>
+                            <constraint firstItem="lLe-MM-Gjl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dhw-1z-hak"/>
+                            <constraint firstItem="sf4-Ay-Y7p" firstAttribute="top" secondItem="mEz-cm-tdm" secondAttribute="bottom" constant="40" id="dl1-ry-0A2"/>
+                            <constraint firstItem="h2y-nN-21q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="u4s-cS-3bS"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addressTextField" destination="h2y-nN-21q" id="gzX-gY-e0i"/>
+                        <outlet property="nameTextField" destination="lLe-MM-Gjl" id="Zsa-ct-r1a"/>
                         <outlet property="phoneTextField" destination="mEz-cm-tdm" id="ttv-B4-kv5"/>
                     </connections>
                 </viewController>
@@ -107,12 +117,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="tWI-6E-YBr" id="3Xe-Vs-XvT"/>
+                        <outlet property="mapView" destination="tWI-6E-YBr" id="RQ5-AU-iNc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uj0-te-Kya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901" y="167"/>
+            <point key="canvasLocation" x="1217" y="400"/>
         </scene>
     </scenes>
 </document>
