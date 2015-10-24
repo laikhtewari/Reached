@@ -23,6 +23,13 @@ class EnteringViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        let destinationViewController: MapViewController = segue.destinationViewController as! MapViewController
+        destinationViewController.address = self.addressTextField.text
+        destinationViewController.phoneNumber = self.phoneTextField.text
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,24 +39,7 @@ class EnteringViewController: UIViewController {
 
     @IBAction func goButtonClicked(sender: AnyObject)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://textbelt.com/text")!)
-        request.HTTPMethod = "POST"
-        let postString = "number=" + phoneTextField.text! + "&message=Hi muma"
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
-            if error != nil {
-                print("error=\(error)")
-                return
-            }
-            
-            print("response = \(response)")
-            
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("responseString = \(responseString)")
-        }
-        task.resume()
+        
     }
     
     func didTapView()

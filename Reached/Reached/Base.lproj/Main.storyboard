@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -89,14 +90,25 @@
                                     <action selector="backButtonTapped:" destination="MTd-id-Hzj" eventType="touchUpInside" id="ZTg-0e-9n4"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tWI-6E-YBr">
+                                <rect key="frame" x="20" y="58" width="560" height="522"/>
+                                <animations/>
+                            </mapView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Hqt-R7-U6P" firstAttribute="leading" secondItem="mRx-qq-3BC" secondAttribute="leadingMargin" id="MFo-zx-uCa"/>
+                            <constraint firstAttribute="bottom" secondItem="tWI-6E-YBr" secondAttribute="bottom" constant="20" symbolic="YES" id="UC7-vm-XNv"/>
+                            <constraint firstItem="tWI-6E-YBr" firstAttribute="top" secondItem="Hqt-R7-U6P" secondAttribute="bottom" constant="8" symbolic="YES" id="aAV-cy-lpx"/>
+                            <constraint firstItem="tWI-6E-YBr" firstAttribute="leading" secondItem="Hqt-R7-U6P" secondAttribute="leading" id="qQ6-du-nws"/>
+                            <constraint firstItem="tWI-6E-YBr" firstAttribute="trailing" secondItem="mRx-qq-3BC" secondAttribute="trailingMargin" id="xmg-Mv-8Ee"/>
                             <constraint firstItem="Hqt-R7-U6P" firstAttribute="top" secondItem="vWe-Vq-7mV" secondAttribute="bottom" id="xxc-GY-NYb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="tWI-6E-YBr" id="3Xe-Vs-XvT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uj0-te-Kya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
