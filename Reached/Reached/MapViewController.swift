@@ -16,7 +16,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     var address: String!
     var phoneNumber: String!
     let locationManager = CLLocationManager()
-    
+    var region: CLCircularRegion!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad()
@@ -38,8 +39,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         } else {
             locationManager.startUpdatingLocation()
         }
-
         
+        addressLabel.text = address
+
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address)
             { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
@@ -54,10 +56,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
                         self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
                         let myRegion = MKCoordinateRegionMakeWithDistance(placemark.location!.coordinate, 1500, 1500)
                         self.mapView.setRegion(myRegion, animated: true)
-                        let myCircularRegion = CLCircularRegion(center: placemark.location!.coordinate, radius: 200, identifier: "myFirstGeofence")
-                        self.locationManager.startMonitoringForRegion(myCircularRegion)
-                        let myCircle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: myCircularRegion.radius)
-                        self.mapView.addOverlay(myCircle)
+                        self.region = CLCircularRegion(center: placemark.location!.coordinate, radius: 200, identifier: "myFirstGeofence")
+                        self.locationManager.startMonitoringForRegion(self.region)
+//                        let myCircle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: myCircularRegion.radius)
+//                        self.mapView.addOverlay(myCircle)
                     }
                 }
         }
@@ -68,17 +70,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    func regionMonitoring()
-    {
-        
-        let currentRegion = CLCircularRegion(center: CLLocationCoordinate2D(latitude: 37.453263, longitude: -122.191283), radius: 100, identifier: "School")
-        
-        locationManager.startMonitoringForRegion(currentRegion)
-    }
-    
 
     @IBAction func backButtonTapped(sender: AnyObject)
     {
+        if let region = self.region
+        {
+            locationManager.stopMonitoringForRegion(region)
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     /*
@@ -96,8 +94,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        let errorAlert = UIAlertView(title: "Error", message: error.description, delegate: nil, cancelButtonTitle: "OK")
-        errorAlert.show()
+//        let errorAlert = UIAlertView(title: "Error", message: error.description, delegate: nil, cancelButtonTitle: "OK")
+//        errorAlert.show()
     }
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
@@ -110,6 +108,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         print("EXITED REGION")
         let myExitMessage = "\(name) has left \(address)."
         textWithMessage(myExitMessage)
+        locationManager.stopMonitoringForRegion(self.region)
     }
     
     func textWithMessage( message: String )

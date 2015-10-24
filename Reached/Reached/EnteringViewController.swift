@@ -10,13 +10,21 @@ import UIKit
 
 class EnteringViewController: UIViewController {
 
+    @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
+//        self.phoneTextField.hidden = true
+//        self.nameTextField.hidden = true
+//        self.addressTextField.hidden = true
+//        self.goButton.hidden = true
+//        
+//        self.phoneTextField.
+        
         super.viewDidLoad()
         
         let tapRecognizer = UITapGestureRecognizer()
@@ -27,6 +35,14 @@ class EnteringViewController: UIViewController {
         {
             self.nameTextField.text = name
         }
+        if let phoneNumber = defaults.objectForKey("phoneNumber") as? String
+        {
+            self.phoneTextField.text = phoneNumber
+        }
+        if let address = defaults.objectForKey("address") as? String
+        {
+            self.addressTextField.text = address
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -34,6 +50,8 @@ class EnteringViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         defaults.setObject(nameTextField.text, forKey: "name")
+        defaults.setObject(phoneTextField.text, forKey: "phoneNumber")
+        defaults.setObject(addressTextField.text, forKey: "address")
         
         let destinationViewController: MapViewController = segue.destinationViewController as! MapViewController
         destinationViewController.address = self.addressTextField.text
