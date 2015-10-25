@@ -26,7 +26,7 @@ class EnteringViewController: UIViewController {
 //        self.phoneTextField.
         
         super.viewDidLoad()
-        
+            
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: "didTapView")
         self.view.addGestureRecognizer(tapRecognizer)

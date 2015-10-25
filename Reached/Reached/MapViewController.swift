@@ -24,13 +24,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     {
         super.viewDidLoad()
         
-        
 
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool)
     {
+        if self.name.isEmpty || self.address.isEmpty || self.phoneNumber.isEmpty
+        {
+            let errorAlert = UIAlertView(title: "Error", message: "Please fill in all spaces", delegate: nil, cancelButtonTitle: "OK")
+            errorAlert.show()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest

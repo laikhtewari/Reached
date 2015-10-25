@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Phone Number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-cm-tdm">
-                                <rect key="frame" x="163" y="149" width="275" height="44"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Phone Number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-cm-tdm">
+                                <rect key="frame" x="163" y="154" width="275" height="44"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.53725490200000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -36,18 +36,6 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Your Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lLe-MM-Gjl">
-                                <rect key="frame" x="163" y="97" width="275" height="44"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.21176470589999999" green="0.53725490200000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="275" id="EIb-lN-GHQ"/>
-                                    <constraint firstAttribute="height" constant="44" id="vuD-Ad-Ald"/>
-                                </constraints>
-                                <color key="textColor" red="0.40080488838021466" green="1" blue="0.73055962738778146" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sf4-Ay-Y7p">
                                 <rect key="frame" x="275" y="265" width="50" height="50"/>
                                 <animations/>
@@ -62,8 +50,8 @@
                                     <segue destination="MTd-id-Hzj" kind="presentation" id="IFs-uB-ZV8"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Enter Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="h2y-nN-21q">
-                                <rect key="frame" x="163" y="201" width="275" height="44"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Enter Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="h2y-nN-21q">
+                                <rect key="frame" x="163" y="206" width="275" height="44"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.53725490200000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -74,24 +62,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Your Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lLe-MM-Gjl">
+                                <rect key="frame" x="163" y="102" width="275" height="44"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.53725490200000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="EIb-lN-GHQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="vuD-Ad-Ald"/>
+                                </constraints>
+                                <color key="textColor" red="0.40080488838021466" green="1" blue="0.73055962738778146" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.38823529411764707" green="0.96470588235294119" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sf4-Ay-Y7p" secondAttribute="bottom" constant="285" id="3f1-2D-VjS"/>
                             <constraint firstItem="sf4-Ay-Y7p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AnG-oj-W1L"/>
-                            <constraint firstItem="sf4-Ay-Y7p" firstAttribute="top" secondItem="h2y-nN-21q" secondAttribute="bottom" constant="20" id="Hg4-JJ-JgX"/>
+                            <constraint firstItem="sf4-Ay-Y7p" firstAttribute="top" relation="greaterThanOrEqual" secondItem="h2y-nN-21q" secondAttribute="bottom" constant="15" id="Hg4-JJ-JgX"/>
                             <constraint firstItem="mEz-cm-tdm" firstAttribute="top" secondItem="h2y-nN-21q" secondAttribute="bottom" constant="-96" id="QJl-hA-BQx"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sf4-Ay-Y7p" secondAttribute="bottom" constant="285" id="TTd-EQ-v6d"/>
                             <constraint firstItem="h2y-nN-21q" firstAttribute="top" secondItem="lLe-MM-Gjl" secondAttribute="bottom" constant="60" id="U4L-ed-LfK"/>
                             <constraint firstItem="mEz-cm-tdm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WxP-nc-KJU"/>
-                            <constraint firstItem="lLe-MM-Gjl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="77" id="cRo-7F-Pke"/>
+                            <constraint firstItem="lLe-MM-Gjl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="cRo-7F-Pke"/>
                             <constraint firstItem="lLe-MM-Gjl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dhw-1z-hak"/>
                             <constraint firstItem="sf4-Ay-Y7p" firstAttribute="top" secondItem="mEz-cm-tdm" secondAttribute="bottom" constant="72" id="dl1-ry-0A2"/>
+                            <constraint firstItem="mEz-cm-tdm" firstAttribute="top" secondItem="lLe-MM-Gjl" secondAttribute="bottom" constant="8" id="fQB-wq-1xZ"/>
                             <constraint firstItem="h2y-nN-21q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="u4s-cS-3bS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="QJl-hA-BQx"/>
+                                <exclude reference="dl1-ry-0A2"/>
                                 <exclude reference="TTd-EQ-v6d"/>
                             </mask>
                         </variation>
