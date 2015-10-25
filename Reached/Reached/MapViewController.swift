@@ -100,7 +100,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("ENTERED REGION")
-        let myEntryMessage = "\(name) has arrived at \(address)."
+        let myEntryMessage = "\(name) has reached \(address)."
         textWithMessage(myEntryMessage)
     }
     
