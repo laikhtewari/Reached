@@ -39,12 +39,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        if #available(iOS 9.0, *) {
-            locationManager.requestLocation()
-        } else {
-            locationManager.startUpdatingLocation()
-        }
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        if #available(iOS 9.0, *) {
+//            locationManager.requestLocation()
+//        } else {
+//            locationManager.startUpdatingLocation()
+//        }
         
         addressLabel.text = address
 
@@ -95,14 +95,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
     }
     */
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-//        let errorAlert = UIAlertView(title: "Error", message: error.description, delegate: nil, cancelButtonTitle: "OK")
-//        errorAlert.show()
-    }
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//
+//    }
+//    
+//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+////        let errorAlert = UIAlertView(title: "Error", message: error.description, delegate: nil, cancelButtonTitle: "OK")
+////        errorAlert.show()
+//    }
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("ENTERED REGION")
