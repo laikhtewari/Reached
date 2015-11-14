@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class EnteringViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class EnteringViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     let defaults = NSUserDefaults.standardUserDefaults()
+    let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
     
     override func viewDidLoad()
     {
@@ -71,6 +73,12 @@ class EnteringViewController: UIViewController {
             destinationViewController.address = self.addressTextField.text
             destinationViewController.phoneNumber = self.phoneTextField.text
             destinationViewController.name = self.nameTextField.text
+            
+            mixpanel.track("Made Geofence", properties: ["Name":self.nameTextField.text!, "Address":self.addressTextField.text!, "Phone Number":self.phoneTextField.text!])
+        }
+        else
+        {
+            mixpanel.track("Went into settings")
         }
     }
 

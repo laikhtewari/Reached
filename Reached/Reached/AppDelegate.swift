@@ -8,16 +8,19 @@
 
 import UIKit
 import Parse
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let defaults = NSUserDefaults.standardUserDefaults()
+    let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Parse.setApplicationId("8fKesGz9WCLLULDtmBWbtyBKwYEeyMHysv99cDle", clientKey: "J15xZSp1Rn89R0YE1tvJ7IwB7lo8STqRY22jNFYy")
+        mixpanel.track("Application Launched", properties: ["ID":Parse.getApplicationId()])
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound, .Badge], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()

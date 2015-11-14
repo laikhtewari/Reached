@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Mixpanel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,7 +27,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>265EFCABC2E230086C05467C7BCE098C</key>
+		<key>48F9E5BAFA3D15AAF178A446ABF08CF3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>B8A759F57254B6094CF99273E5ECEE8B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D306E1A19F57F62CC2320ED0D34FE3F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'Reached' do
 pod 'Parse'
+pod 'Mixpanel'
 end
 
 target 'ReachedTests' do
