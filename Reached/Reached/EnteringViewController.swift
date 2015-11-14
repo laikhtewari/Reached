@@ -18,12 +18,18 @@ class EnteringViewController: UIViewController {
     
     override func viewDidLoad()
     {
-//        self.phoneTextField.hidden = true
-//        self.nameTextField.hidden = true
-//        self.addressTextField.hidden = true
-//        self.goButton.hidden = true
-//        
-//        self.phoneTextField.
+        if let tutorialAtStart = defaults.objectForKey("tutorialAtStart") as? Bool
+        {
+            if tutorialAtStart
+            {
+                //DO TUTORIAL
+            }
+        }
+        else
+        {
+            //DO TUTORIAL
+            defaults.setObject(false, forKey: "tutorialAtStart")
+        }
         
         super.viewDidLoad()
             
@@ -31,17 +37,23 @@ class EnteringViewController: UIViewController {
         tapRecognizer.addTarget(self, action: "didTapView")
         self.view.addGestureRecognizer(tapRecognizer)
     
-        if let name = defaults.objectForKey("name") as? String
+        if let favoriteShowStart = defaults.objectForKey("favoriteShowStart") as? Bool
         {
-            self.nameTextField.text = name
-        }
-        if let phoneNumber = defaults.objectForKey("phoneNumber") as? String
-        {
-            self.phoneTextField.text = phoneNumber
-        }
-        if let address = defaults.objectForKey("address") as? String
-        {
-            self.addressTextField.text = address
+            if favoriteShowStart
+            {
+                if let name = defaults.objectForKey("name") as? String
+                {
+                    self.nameTextField.text = name
+                }
+                if let phoneNumber = defaults.objectForKey("phoneNumber") as? String
+                {
+                    self.phoneTextField.text = phoneNumber
+                }
+                if let address = defaults.objectForKey("address") as? String
+                {
+                    self.addressTextField.text = address
+                }
+            }
         }
 
         // Do any additional setup after loading the view.
@@ -49,14 +61,17 @@ class EnteringViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        defaults.setObject(nameTextField.text, forKey: "name")
-        defaults.setObject(phoneTextField.text, forKey: "phoneNumber")
-        defaults.setObject(addressTextField.text, forKey: "address")
+        if segue.identifier == "ToMap"
+        {
+//            defaults.setObject(nameTextField.text, forKey: "name")
+//            defaults.setObject(phoneTextField.text, forKey: "phoneNumber")
+//            defaults.setObject(addressTextField.text, forKey: "address")
         
-        let destinationViewController: MapViewController = segue.destinationViewController as! MapViewController
-        destinationViewController.address = self.addressTextField.text
-        destinationViewController.phoneNumber = self.phoneTextField.text
-        destinationViewController.name = self.nameTextField.text
+            let destinationViewController: MapViewController = segue.destinationViewController as! MapViewController
+            destinationViewController.address = self.addressTextField.text
+            destinationViewController.phoneNumber = self.phoneTextField.text
+            destinationViewController.name = self.nameTextField.text
+        }
     }
 
     override func didReceiveMemoryWarning() {

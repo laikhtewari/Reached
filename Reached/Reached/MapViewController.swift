@@ -9,21 +9,24 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Parse
 
-class MapViewController: UIViewController, CLLocationManagerDelegate
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
 {
     var name: String!
     var address: String!
     var phoneNumber: String!
     let locationManager = CLLocationManager()
+    var circleRenderer = MKCircleRenderer()
+    var circle: MKCircle!
     var region: CLCircularRegion!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    let defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
 
         // Do any additional setup after loading the view.
     }
@@ -38,6 +41,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         }
         
         locationManager.delegate = self
+        mapView.delegate = self
         locationManager.requestAlwaysAuthorization()
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 //        if #available(iOS 9.0, *) {
@@ -62,7 +66,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
                         self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
                         let myRegion = MKCoordinateRegionMakeWithDistance(placemark.location!.coordinate, 1500, 1500)
                         self.mapView.setRegion(myRegion, animated: true)
-                        self.region = CLCircularRegion(center: placemark.location!.coordinate, radius: 200, identifier: "myFirstGeofence")
+                        self.region = CLCircularRegion(center: placemark.location!.coordinate, radius: 500, identifier: "myFirstGeofence")
+                        self.circle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: 500)
+                        self.mapView.addOverlay(self.circle as MKOverlay)
                         self.locationManager.startMonitoringForRegion(self.region)
 //                        let myCircle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: myCircularRegion.radius)
 //                        self.mapView.addOverlay(myCircle)
@@ -116,6 +122,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
         textWithMessage(myExitMessage)
         locationManager.stopMonitoringForRegion(self.region)
     }
+
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        return self.circleRenderer
+    }
+    
     
     func textWithMessage( message: String )
     {
@@ -128,10 +140,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate
 
             print("RESPONSE = \(response)")
             
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("responseString = \(responseString)")
+//            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+//            if let error = error {
+//                let myAlert = UIAlertView(title: "Error", message: "Unable to send message: \(error)", delegate: nil, cancelButtonTitle: "OK")
+//                myAlert.show()
+//            }
+//            else {
+//                let myAlert = UIAlertView(title: "Success", message: "Message sent", delegate: nil, cancelButtonTitle: "OK")
+//                myAlert.show()
+//            }
+            
         }
         task.resume()
+        
+        let pushQuery = PFInstallation.query()!
+        pushQuery.whereKey("deviceToken", equalTo: defaults.objectForKey("deviceToken")!)
+        let push = PFPush()
+        let data = ["alert" : "Message sent"]
+        push.setQuery(pushQuery)
+        push.setData(data)
+        push.sendPushInBackground()
     }
 }
 
