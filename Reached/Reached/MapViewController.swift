@@ -140,23 +140,48 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
             print("RESPONSE = \(response)")
             
-//            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-//            if let error = error {
-//                let myAlert = UIAlertView(title: "Error", message: "Unable to send message: \(error)", delegate: nil, cancelButtonTitle: "OK")
-//                myAlert.show()
-//            }
-//            else {
-//                let myAlert = UIAlertView(title: "Success", message: "Message sent", delegate: nil, cancelButtonTitle: "OK")
-//                myAlert.show()
-//            }
-            
+            do
+            {
+                let jsonObject:AnyObject? = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                
+                if let dictionary = jsonObject as? NSDictionary
+                {
+                    if let success = dictionary["success"]
+                    {
+                        if !(success as! Bool)
+                        {
+                            if let errorMessage = dictionary["message"]
+                            {
+                                let errorString = errorMessage as? String
+                                self.sendPush("Error: " + errorString!)
+                            }
+                        }
+                        else
+                        {
+                            self.sendPush("Message successfully sent")
+                        }
+                    }
+                }
+            }
+            catch let caught as NSError
+            {
+                self.sendPush("Error: " + caught.domain)
+            }
+            catch
+            {
+                self.sendPush("Error: Something unexpected happened!")
+            }
+        
         }
         task.resume()
-        
+    }
+    
+    func sendPush ( message: String )
+    {
         let pushQuery = PFInstallation.query()!
-        pushQuery.whereKey("deviceToken", equalTo: defaults.objectForKey("deviceToken")!)
+        pushQuery.whereKey("deviceToken", equalTo: self.defaults.objectForKey("deviceToken")!)
         let push = PFPush()
-        let data = ["alert" : "Message sent"]
+        let data = ["alert" : message]
         push.setQuery(pushQuery)
         push.setData(data)
         push.sendPushInBackground()
