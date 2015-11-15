@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import Parse
+import Mixpanel
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
 {
@@ -23,6 +24,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     let defaults = NSUserDefaults.standardUserDefaults()
+    let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
 
     override func viewDidLoad()
     {
@@ -154,11 +156,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                             {
                                 let errorString = errorMessage as? String
                                 self.sendPush("Error: " + errorString!)
+                                self.mixpanel.track("Error sending text", properties: ["error":errorString!])
                             }
                         }
                         else
                         {
                             self.sendPush("Message successfully sent")
+                            self.mixpanel.track("Message successfully sent")
                         }
                     }
                 }
@@ -166,10 +170,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             catch let caught as NSError
             {
                 self.sendPush("Error: " + caught.domain)
+                self.mixpanel.track("Error sending text", properties: ["error" : caught.domain])
             }
             catch
             {
                 self.sendPush("Error: Something unexpected happened!")
+                self.mixpanel.track("Error sending text", properties: ["error" : "unexpected"])
             }
         
         }
