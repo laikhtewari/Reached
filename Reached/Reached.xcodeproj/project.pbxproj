@@ -135,8 +135,8 @@
 			children = (
 				CB18E1881BD1DCE30065B142 /* AppDelegate.swift */,
 				CB18E18C1BD1DCE30065B142 /* Main.storyboard */,
-				CB18E18F1BD1DCE30065B142 /* Assets.xcassets */,
 				CB18E1911BD1DCE30065B142 /* LaunchScreen.storyboard */,
+				CB18E18F1BD1DCE30065B142 /* Assets.xcassets */,
 				CB18E1941BD1DCE30065B142 /* Info.plist */,
 				CB18E1B61BD1DD1E0065B142 /* EnteringViewController.swift */,
 				CB6AB1581BDF471A006F3E3D /* SettingsViewController.swift */,

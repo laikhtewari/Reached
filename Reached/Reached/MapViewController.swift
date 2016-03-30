@@ -9,7 +9,6 @@
 import UIKit
 import CoreLocation
 import MapKit
-import Parse
 import Mixpanel
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
@@ -155,13 +154,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                             if let errorMessage = dictionary["message"]
                             {
                                 let errorString = errorMessage as? String
-                                self.sendPush("Error: " + errorString!)
                                 self.mixpanel.track("Error sending text", properties: ["error":errorString!])
                             }
                         }
                         else
                         {
-                            self.sendPush("Message successfully sent")
                             self.mixpanel.track("Message successfully sent")
                         }
                     }
@@ -169,28 +166,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
             catch let caught as NSError
             {
-                self.sendPush("Error: " + caught.domain)
                 self.mixpanel.track("Error sending text", properties: ["error" : caught.domain])
             }
             catch
             {
-                self.sendPush("Error: Something unexpected happened!")
                 self.mixpanel.track("Error sending text", properties: ["error" : "unexpected"])
             }
         
         }
         task.resume()
-    }
-    
-    func sendPush ( message: String )
-    {
-        let pushQuery = PFInstallation.query()!
-        pushQuery.whereKey("deviceToken", equalTo: self.defaults.objectForKey("deviceToken")!)
-        let push = PFPush()
-        let data = ["alert" : message]
-        push.setQuery(pushQuery)
-        push.setData(data)
-        push.sendPushInBackground()
     }
 }
 
