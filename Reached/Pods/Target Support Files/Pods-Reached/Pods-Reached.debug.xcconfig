@@ -1,6 +1,10 @@
+EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/OneSignal/iOS_SDK/Framework"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/OneSignal"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Bolts.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Mixpanel.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Parse.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Bolts" -framework "Mixpanel" -framework "Parse"
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Mixpanel.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/TextFieldEffects.framework/Headers" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/OneSignal"
+OTHER_LDFLAGS = $(inherited) -ObjC -framework "Mixpanel" -framework "OneSignal" -framework "SystemConfiguration" -framework "TextFieldEffects"
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-Reached
 PODS_ROOT = ${SRCROOT}/Pods

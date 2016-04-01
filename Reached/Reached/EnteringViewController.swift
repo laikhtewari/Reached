@@ -15,6 +15,7 @@ class EnteringViewController: UIViewController {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
+    
     let defaults = NSUserDefaults.standardUserDefaults()
     let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
     
@@ -57,8 +58,6 @@ class EnteringViewController: UIViewController {
                 }
             }
         }
-
-        // Do any additional setup after loading the view.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -69,14 +68,14 @@ class EnteringViewController: UIViewController {
 //            defaults.setObject(phoneTextField.text, forKey: "phoneNumber")
 //            defaults.setObject(addressTextField.text, forKey: "address")
         
-            let destinationViewController: MapViewController = segue.destinationViewController as! MapViewController
+            let destinationViewController = segue.destinationViewController as! MapViewController
             destinationViewController.address = self.addressTextField.text
             destinationViewController.phoneNumber = self.phoneTextField.text
             destinationViewController.name = self.nameTextField.text
             
             mixpanel.track("Made Geofence", properties: ["Name":self.nameTextField.text!, "Address":self.addressTextField.text!, "Phone Number":self.phoneTextField.text!])
         }
-        else
+        else if segue.identifier == "ToSettings"
         {
             mixpanel.track("Went into settings")
         }
@@ -84,24 +83,14 @@ class EnteringViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func goPressed(sender: AnyObject) {
+        self.performSegueWithIdentifier("ToMap", sender: self)
+    }
     
     func didTapView()
     {
         self.view.endEditing(true)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controlle
-    }
-    */
-
 }

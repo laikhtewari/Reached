@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parse
 import Mixpanel
 
 @UIApplicationMain
@@ -16,11 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let defaults = NSUserDefaults.standardUserDefaults()
     let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
+    let oneSignal = OneSignal(launchOptions: nil, appId: "8aab5c40-88f4-11e5-bb17-a0369f2d9328", handleNotification: nil)
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        Parse.setApplicationId("8fKesGz9WCLLULDtmBWbtyBKwYEeyMHysv99cDle", clientKey: "J15xZSp1Rn89R0YE1tvJ7IwB7lo8STqRY22jNFYy")
-        mixpanel.track("Application Launched", properties: ["ID":Parse.getApplicationId()])
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        mixpanel.track("Application Launched", properties: ["Name": UIDevice.currentDevice().name])
+        
+        OneSignal.defaultClient().enableInAppAlertNotification(true)
+        
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound, .Badge], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -31,19 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        application.statusBarHidden = true
+        
         return true
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let installation = PFInstallation.currentInstallation()
-        installation["device"] = installation.deviceType
-        installation.setDeviceTokenFromData(deviceToken)
-        defaults.setObject(deviceToken, forKey: "deviceToken")
-        installation.saveInBackground()
+//        let installation = PFInstallation.currentInstallation()
+//        installation["device"] = installation.deviceType
+//        installation.setDeviceTokenFromData(deviceToken)
+//        defaults.setObject(deviceToken, forKey: "deviceToken")
+//        installation.saveInBackground()
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
+//        PFPush.handlePush(userInfo)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -80,39 +84,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        self.clearBadges()
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        let pushQuery = PFInstallation.query()!
-        let installationId = PFInstallation.currentInstallation().installationId
-        pushQuery.whereKey("installationId", equalTo: installationId)
-        let push = PFPush()
-        let data = ["alert" : "Warning: Reached cannot send messages if the app is completely closed"]
-        push.setQuery(pushQuery)
-        push.setData(data)
-        NSThread.sleepForTimeInterval(3)
-        do {
-            try push.sendPush()
-        }
-        catch {
-            print("ERROR")
-        }
+//        let pushQuery = PFInstallation.query()!
+//        let installationId = PFInstallation.currentInstallation().installationId
+//        pushQuery.whereKey("installationId", equalTo: installationId)
+//        let push = PFPush()
+//        let data = ["alert" : "Warning: Reached cannot send messages if the app is completely closed"]
+//        push.setQuery(pushQuery)
+//        push.setData(data)
+//        NSThread.sleepForTimeInterval(3)
+//        do {
+//            try push.sendPush()
+//        }
+//        catch {
+//            print("ERROR")
+//        }
     }
 
-    func clearBadges() {
-        let installation = PFInstallation.currentInstallation()
-        installation.badge = 0
-        installation.saveInBackgroundWithBlock { (success, error) -> Void in
-            if success {
-                print("cleared badges")
-                UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-            }
-            else {
-                print("failed to clear badges")
-            }
-        }
-    }
+//    func clearBadges() {
+//        let installation = PFInstallation.currentInstallation()
+//        installation.badge = 0
+//        installation.saveInBackgroundWithBlock { (success, error) -> Void in
+//            if success {
+//                print("cleared badges")
+//                UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+//            }
+//            else {
+//                print("failed to clear badges")
+//            }
+//        }
+//    }
 }
 

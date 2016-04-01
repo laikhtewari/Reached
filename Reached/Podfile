@@ -4,7 +4,8 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'Reached' do
-pod 'Parse'
+pod 'TextFieldEffects'
+pod 'OneSignal'
 pod 'Mixpanel'
 end
 

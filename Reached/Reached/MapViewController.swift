@@ -20,16 +20,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var circleRenderer = MKCircleRenderer()
     var circle: MKCircle!
     var region: CLCircularRegion!
+    
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    
     let defaults = NSUserDefaults.standardUserDefaults()
     let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool)
@@ -40,7 +41,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             errorAlert.show()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
         locationManager.delegate = self
         mapView.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -78,9 +78,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -92,42 +92,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//    }
-//    
-//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-////        let errorAlert = UIAlertView(title: "Error", message: error.description, delegate: nil, cancelButtonTitle: "OK")
-////        errorAlert.show()
-//    }
-    
-    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("ENTERED REGION")
-        let myEntryMessage = "\(name) has reached \(address)."
-        textWithMessage(myEntryMessage)
-    }
-    
-    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
-        print("EXITED REGION")
-        let myExitMessage = "\(name) has left \(address)."
-        textWithMessage(myExitMessage)
-        locationManager.stopMonitoringForRegion(self.region)
-    }
-
-    
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        return self.circleRenderer
-    }
     
     
     func textWithMessage( message: String )
@@ -136,7 +100,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         request.HTTPMethod = "POST"
         let postString = "number=" + phoneNumber! + "&message=" + message
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request)
+        {
             data, response, error in
 
             print("RESPONSE = \(response)")
@@ -175,6 +140,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         }
         task.resume()
+    }
+}
+
+extension MapViewController
+{
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("ENTERED REGION")
+        let myEntryMessage = "\(name) has reached \(address)."
+        textWithMessage(myEntryMessage)
+    }
+    
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("EXITED REGION")
+        let myExitMessage = "\(name) has left \(address)."
+        textWithMessage(myExitMessage)
+        locationManager.stopMonitoringForRegion(self.region)
+    }
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
+    {
+        return self.circleRenderer
     }
 }
 

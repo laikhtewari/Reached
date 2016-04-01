@@ -1,18 +1,18 @@
 PODS:
-  - Bolts/Tasks (1.4.0)
   - Mixpanel (2.9.0):
     - Mixpanel/Mixpanel (= 2.9.0)
   - Mixpanel/Mixpanel (2.9.0)
-  - Parse (1.9.1):
-    - Bolts/Tasks (>= 1.4.0)
+  - OneSignal (1.12.1)
+  - TextFieldEffects (1.2.0)
 
 DEPENDENCIES:
   - Mixpanel
-  - Parse
+  - OneSignal
+  - TextFieldEffects
 
 SPEC CHECKSUMS:
-  Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Mixpanel: 42ae6168effc48481d957f7883dd8514a398738d
-  Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b
+  OneSignal: 5b42a3f7abbe069649c2673c1e714156c66a4c4a
+  TextFieldEffects: bc4fd3bd557321bd61a0762f3f50965477a36f62
 
 COCOAPODS: 0.39.0
