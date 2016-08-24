@@ -18,7 +18,6 @@
 		CB18E1B91BD1E5C10065B142 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB18E1B81BD1E5C10065B142 /* MapViewController.swift */; };
 		CB18E1BB1BD20FA40065B142 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB18E1BA1BD20FA40065B142 /* CoreLocation.framework */; };
 		CB2835481BD224A900F7852B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2835471BD224A900F7852B /* MapKit.framework */; };
-		CB6AB1591BDF471A006F3E3D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6AB1581BDF471A006F3E3D /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +57,6 @@
 		CB18E1B81BD1E5C10065B142 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CB18E1BA1BD20FA40065B142 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CB2835471BD224A900F7852B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		CB6AB1581BDF471A006F3E3D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = ../SettingsViewController.swift; sourceTree = "<group>"; };
-		CB8924191CABB3B800C5D8CF /* Reached-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Reached-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,9 +136,7 @@
 				CB18E1911BD1DCE30065B142 /* LaunchScreen.storyboard */,
 				CB18E18F1BD1DCE30065B142 /* Assets.xcassets */,
 				CB18E1941BD1DCE30065B142 /* Info.plist */,
-				CB8924191CABB3B800C5D8CF /* Reached-Bridging-Header.h */,
 				CB18E1B61BD1DD1E0065B142 /* EnteringViewController.swift */,
-				CB6AB1581BDF471A006F3E3D /* SettingsViewController.swift */,
 				CB18E1B81BD1E5C10065B142 /* MapViewController.swift */,
 			);
 			path = Reached;
@@ -358,7 +353,6 @@
 				CB18E1891BD1DCE30065B142 /* AppDelegate.swift in Sources */,
 				CB18E1B71BD1DD1E0065B142 /* EnteringViewController.swift in Sources */,
 				CB18E1B91BD1E5C10065B142 /* MapViewController.swift in Sources */,
-				CB6AB1591BDF471A006F3E3D /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,7 +505,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Laikh-Tewari.Reached";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Reached/Reached-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -529,7 +523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Laikh-Tewari.Reached";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Reached/Reached-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

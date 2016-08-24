@@ -15,25 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let defaults = NSUserDefaults.standardUserDefaults()
     let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
-    let oneSignal = OneSignal(launchOptions: nil, appId: "8aab5c40-88f4-11e5-bb17-a0369f2d9328", handleNotification: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         mixpanel.track("Application Launched", properties: ["Name": UIDevice.currentDevice().name])
         
-        OneSignal.defaultClient().enableInAppAlertNotification(true)
+//        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound, .Badge], categories: nil)
+//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+          UIApplication.sharedApplication().registerForRemoteNotifications()
         
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Sound, .Badge], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().registerForRemoteNotifications()
-        
-        if let launchOptions = launchOptions as? [String : AnyObject] {
-            if let notificationDictionary = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
-                self.application(application, didReceiveRemoteNotification: notificationDictionary)
-            }
-        }
-        
-        application.statusBarHidden = true
+//        if let launchOptions = launchOptions as? [String : AnyObject] {
+//            if let notificationDictionary = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
+//                self.application(application, didReceiveRemoteNotification: notificationDictionary)
+//            }
+//        }
         
         return true
     }
@@ -48,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 //        PFPush.handlePush(userInfo)
+        print("\n\n\n\nTREY SUCKS\n\n\n\n")
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {

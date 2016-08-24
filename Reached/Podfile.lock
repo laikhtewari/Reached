@@ -1,18 +1,15 @@
 PODS:
-  - Mixpanel (2.9.0):
-    - Mixpanel/Mixpanel (= 2.9.0)
-  - Mixpanel/Mixpanel (2.9.0)
-  - OneSignal (1.12.1)
+  - Mixpanel (2.9.4):
+    - Mixpanel/Mixpanel (= 2.9.4)
+  - Mixpanel/Mixpanel (2.9.4)
   - TextFieldEffects (1.2.0)
 
 DEPENDENCIES:
   - Mixpanel
-  - OneSignal
   - TextFieldEffects
 
 SPEC CHECKSUMS:
-  Mixpanel: 42ae6168effc48481d957f7883dd8514a398738d
-  OneSignal: 5b42a3f7abbe069649c2673c1e714156c66a4c4a
+  Mixpanel: 80d2ca9bb38ae91c1044d738e80fe448377ac89f
   TextFieldEffects: bc4fd3bd557321bd61a0762f3f50965477a36f62
 
 COCOAPODS: 0.39.0

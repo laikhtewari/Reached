@@ -55,26 +55,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address)
-            { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-                if let error = error
+        { (placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+            if let error = error
+            {
+                print(error)
+                self.mixpanel.track("Error with geocoder", properties: ["error" : error.domain])
+            }
+            else
+            {
+                if let placemark = placemarks?[0]
                 {
-                    print(error)
+                    self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
+                    
+                    let myRegion = MKCoordinateRegionMakeWithDistance(placemark.location!.coordinate, 1500, 1500)
+                    self.mapView.setRegion(myRegion, animated: true)
+                    
+                    self.region = CLCircularRegion(center: placemark.location!.coordinate, radius: 500, identifier: "myFirstGeofence")
+                    
+                    let myCircle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: 500)
+                    
+                    
+//                    self.circle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: 500)
+                    
+//                    self.mapView.addOverlay(self.circle as MKOverlay)
+                    
+                    self.locationManager.startMonitoringForRegion(self.region)
+                    
+//                  let myCircle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: myCircularRegion.radius)
+//                  self.mapView.addOverlay(myCircle)
                 }
-                else
-                {
-                    if let placemark = placemarks?[0]
-                    {
-                        self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
-                        let myRegion = MKCoordinateRegionMakeWithDistance(placemark.location!.coordinate, 1500, 1500)
-                        self.mapView.setRegion(myRegion, animated: true)
-                        self.region = CLCircularRegion(center: placemark.location!.coordinate, radius: 500, identifier: "myFirstGeofence")
-                        self.circle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: 500)
-                        self.mapView.addOverlay(self.circle as MKOverlay)
-                        self.locationManager.startMonitoringForRegion(self.region)
-//                        let myCircle = MKCircle(centerCoordinate: placemark.location!.coordinate, radius: myCircularRegion.radius)
-//                        self.mapView.addOverlay(myCircle)
-                    }
-                }
+            }
         }
     }
 

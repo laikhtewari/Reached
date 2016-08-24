@@ -5,7 +5,6 @@ use_frameworks!
 
 target 'Reached' do
 pod 'TextFieldEffects'
-pod 'OneSignal'
 pod 'Mixpanel'
 end
 
