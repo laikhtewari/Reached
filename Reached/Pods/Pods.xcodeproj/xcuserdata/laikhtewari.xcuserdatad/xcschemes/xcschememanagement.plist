@@ -4,17 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Mixpanel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Reached.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>TextFieldEffects.xcscheme</key>
+		<key>Pods-ReachedTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ReachedUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4143441BE6BCFF6A63146A0FE845E221</key>
+		<key>5F6B2CD4F7CE7F71F9A5F2D394497630</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E738885E115F97D07ECE3FA609C0A17</key>
+		<key>8E956AFE40727848F7CB1BA326EAD912</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA6224DCAE98A51312686C940F515130</key>
+		<key>B29BF0D42DBB336CD883DBED810F2B47</key>
 		<dict>
 			<key>primary</key>
 			<true/>

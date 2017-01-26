@@ -1,0 +1,6 @@
+framework module Pods_ReachedTests {
+  umbrella header "Pods-ReachedTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

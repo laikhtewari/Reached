@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Mixpanel
 
 class EnteringViewController: UIViewController {
 
@@ -16,14 +15,11 @@ class EnteringViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     
-    let defaults = NSUserDefaults.standardUserDefaults()
-    let mixpanel = Mixpanel.sharedInstanceWithToken("e6bbb41ffc936f18357b7bb308f6f9aa")
-    
     override func viewDidLoad()
     {
-        if let tutorialAtStart = defaults.objectForKey("tutorialAtStart") as? Bool
+        if let tutorial = UserDefaults.standard.value(forKey: "tutorial") as? Bool
         {
-            if tutorialAtStart
+            if tutorial
             {
                 //DO TUTORIAL
             }
@@ -31,28 +27,31 @@ class EnteringViewController: UIViewController {
         else
         {
             //DO TUTORIAL
-            defaults.setObject(false, forKey: "tutorialAtStart")
+            UserDefaults.standard.setValue(false, forKey: "tutorial")
         }
         
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             
         let tapRecognizer = UITapGestureRecognizer()
-        tapRecognizer.addTarget(self, action: "didTapView")
+        tapRecognizer.addTarget(self, action: #selector(EnteringViewController.didTapView))
         self.view.addGestureRecognizer(tapRecognizer)
     
-        if let favoriteShowStart = defaults.objectForKey("favoriteShowStart") as? Bool
+        if let favoriteShowStart = UserDefaults.standard.value(forKey: "favoriteShowStart") as? Bool
         {
             if favoriteShowStart
             {
-                if let name = defaults.objectForKey("name") as? String
+                if let name = UserDefaults.standard.value(forKey: "name") as? String
                 {
                     self.nameTextField.text = name
                 }
-                if let phoneNumber = defaults.objectForKey("phoneNumber") as? String
+                if let phoneNumber = UserDefaults.standard.value(forKey: "phoneNumber") as? String
                 {
                     self.phoneTextField.text = phoneNumber
                 }
-                if let address = defaults.objectForKey("address") as? String
+                if let address = UserDefaults.standard.value(forKey: "address") as? String
                 {
                     self.addressTextField.text = address
                 }
@@ -60,7 +59,7 @@ class EnteringViewController: UIViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "ToMap"
         {
@@ -68,16 +67,13 @@ class EnteringViewController: UIViewController {
 //            defaults.setObject(phoneTextField.text, forKey: "phoneNumber")
 //            defaults.setObject(addressTextField.text, forKey: "address")
         
-            let destinationViewController = segue.destinationViewController as! MapViewController
+            let destinationViewController = segue.destination as! MapViewController
             destinationViewController.address = self.addressTextField.text
             destinationViewController.phoneNumber = self.phoneTextField.text
             destinationViewController.name = self.nameTextField.text
-            
-            mixpanel.track("Made Geofence", properties: ["Name":self.nameTextField.text!, "Address":self.addressTextField.text!, "Phone Number":self.phoneTextField.text!])
-        }
-        else if segue.identifier == "ToSettings"
+        } else if segue.identifier == "ToSettings"
         {
-            mixpanel.track("Went into settings")
+            //Into settings
         }
     }
 
@@ -85,12 +81,28 @@ class EnteringViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func goPressed(sender: AnyObject) {
-        self.performSegueWithIdentifier("ToMap", sender: self)
+    @IBAction func goPressed(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "ToMap", sender: self)
     }
     
     func didTapView()
     {
         self.view.endEditing(true)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
     }
 }
