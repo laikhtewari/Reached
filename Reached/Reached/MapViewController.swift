@@ -176,13 +176,13 @@ extension MapViewController
 {
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("ENTERED REGION")
-        let myEntryMessage = "\(name!) has reached \(address!)."
+        let myEntryMessage = "\(name as String) has reached \(address as String)."
         textWithMessage(myEntryMessage)
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         print("EXITED REGION")
-        let myExitMessage = "\(name) has left \(address)."
+        let myExitMessage = "\(name as String) has left \(address as String)."
         textWithMessage(myExitMessage)
         locationManager.stopMonitoring(for: self.region)
     }

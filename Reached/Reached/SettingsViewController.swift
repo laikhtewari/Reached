@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let radius = defaults.value(forKey: "radius") {
-            self.geofenceRadiusLabel.text = String(radius as! Float)
+            self.geofenceRadiusLabel.text = String(lroundf(radius as! Float))
             self.geofenceRadiusSlider.setValue(radius as! Float, animated: false)
         } else {
             print("ERROR: NO PRESET RADIUS")
@@ -79,7 +79,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func radiusChanged(_ sender: Any) {
-        geofenceRadiusLabel.text = String(geofenceRadiusSlider.value)
+        geofenceRadiusLabel.text = String(lroundf(geofenceRadiusSlider.value))
     }
 
     /*
