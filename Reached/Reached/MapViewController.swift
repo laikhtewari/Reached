@@ -15,10 +15,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var name: String!
     var address: String!
     var phoneNumber: String!
+    
     let locationManager = CLLocationManager()
     var circleRenderer = MKCircleRenderer()
     var circle: MKCircle!
     var region: CLCircularRegion!
+    
+    let geofenceRadius = 75
     
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -82,13 +85,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 if let placemark = placemarks?[0]
                 {
                     self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
+                    self.addressLabel.text = placemark.name
                     
-                    let myRegion = MKCoordinateRegionMakeWithDistance(placemark.location!.coordinate, 1500, 1500)
+                    let myRegion = MKCoordinateRegionMakeWithDistance(placemark.location!.coordinate, 500, 500)
                     self.mapView.setRegion(myRegion, animated: true)
                     
-                    self.region = CLCircularRegion(center: placemark.location!.coordinate, radius: 500, identifier: "myFirstGeofence")
+                    self.region = CLCircularRegion(center: placemark.location!.coordinate, radius: CLLocationDistance(self.geofenceRadius), identifier: "myFirstGeofence")
                     
-                    let myCircle = MKCircle(center: placemark.location!.coordinate, radius: 500)
+                    let myCircle = MKCircle(center: placemark.location!.coordinate, radius: CLLocationDistance(self.geofenceRadius))
+                    self.mapView.add(myCircle)
                     
                     self.locationManager.startMonitoring(for: self.region)
                 }
@@ -113,8 +118,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     
-    func textWithMessage( _ message: String )
+    func textWithMessageTextbelt( _ message: String )
     {
+        
+        //Textbelt
         var request = URLRequest(url: URL(string: "https://textbelt.com/text")!)
         request.httpMethod = "POST"
         let postString = "number=" + phoneNumber! + "&message=" + message
@@ -135,50 +142,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             print("responseString = \(responseString)")
         }
         task.resume()
-//        let request = NSMutableURLRequest(url: URL(string: "https://textbelt.com/text")!)
-//        request.httpMethod = "POST"
-//        let postString = "number=" + phoneNumber! + "&message=" + message
-//        request.httpBody = postString.data(using: String.Encoding.utf8)
-//        let task = URLSession.shared.dataTask(with: request, completionHandler: {
-//            data, response, error in
-//
-//            print("RESPONSE = \(response)")
-//            
-//            do
-//            {
-//                let jsonObject:AnyObject? = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-//                
-//                if let dictionary = jsonObject as? NSDictionary
-//                {
-//                    if let success = dictionary["success"]
-//                    {
-//                        if !(success as! Bool)
-//                        {
-//                            if let errorMessage = dictionary["message"]
-//                            {
-//                                let errorString = errorMessage as? String
-//                                self.mixpanel.track("Error sending text", properties: ["error":errorString!])
-//                            }
-//                        }
-//                        else
-//                        {
-//                            self.mixpanel.track("Message successfully sent")
-//                        }
-//                    }
-//                }
-//            }
-//            catch let caught as NSError
-//            {
-//                self.mixpanel.track("Error sending text", properties: ["error" : caught.domain])
-//            }
-//            catch
-//            {
-//                self.mixpanel.track("Error sending text", properties: ["error" : "unexpected"])
-//            }
-//        
-//        })        
-//
-//        task.resume()
+    }
+    
+    func textWithMessage(_ message: String) {
+        let twilioSID = "ACf0b6b8965d96aaae85a497897bcb475f"
+        let twilioSecret = "c7857cde401d1e2585aff93924221f22"
+        
+        let fromNumber = "%2B12017204289"
+        let toNumber = "%2B1" + (phoneNumber as String)
+        
+        var request = URLRequest(url: URL(string: "https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
+        request.httpMethod = "POST"
+        request.httpBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".data(using: String.Encoding.utf8)
+        
+        URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+            print("Finished")
+            if let data = data, let responseDetails = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+                // Success
+                print("Response: \(responseDetails)")
+            } else {
+                // Failure
+                print("Error: \(error)")
+            }
+        }).resume()
     }
 }
 
@@ -186,7 +172,7 @@ extension MapViewController
 {
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("ENTERED REGION")
-        let myEntryMessage = "\(name) has reached \(address)."
+        let myEntryMessage = "\(name!) has reached \(address!)."
         textWithMessage(myEntryMessage)
     }
     
@@ -199,7 +185,15 @@ extension MapViewController
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
     {
-        return self.circleRenderer
+        if let overlay = overlay as? MKCircle {
+            let circleRenderer = MKCircleRenderer(circle: overlay)
+            circleRenderer.fillColor = UIColor(red:0.00, green:1.00, blue:0.81, alpha:0.4)
+            circleRenderer.strokeColor = UIColor(red:0.00, green:1.00, blue:0.81, alpha:0.75)
+            circleRenderer.lineWidth = 5
+            return circleRenderer
+        } else {
+            return MKOverlayRenderer()
+        }
     }
 }
 
