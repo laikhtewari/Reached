@@ -19,6 +19,7 @@
 		CB18E1B91BD1E5C10065B142 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB18E1B81BD1E5C10065B142 /* MapViewController.swift */; };
 		CB18E1BB1BD20FA40065B142 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB18E1BA1BD20FA40065B142 /* CoreLocation.framework */; };
 		CB2835481BD224A900F7852B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2835471BD224A900F7852B /* MapKit.framework */; };
+		CBAA091D1E3B1EA200E78B56 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAA091C1E3B1EA200E78B56 /* SettingsViewController.swift */; };
 		E28DA45B4B0CB2B7AF911DE7 /* Pods_ReachedTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D55A9A7CCA601053BE0C8608 /* Pods_ReachedTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		CB18E1B81BD1E5C10065B142 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CB18E1BA1BD20FA40065B142 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CB2835471BD224A900F7852B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CBAA091C1E3B1EA200E78B56 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD929B904E1D0D9C7FFD21F5 /* Pods-ReachedUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReachedUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReachedUITests/Pods-ReachedUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D55A9A7CCA601053BE0C8608 /* Pods_ReachedTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReachedTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2FD1C334C6A4570770B008 /* Pods_ReachedUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReachedUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 				CB18E1941BD1DCE30065B142 /* Info.plist */,
 				CB18E1B61BD1DD1E0065B142 /* EnteringViewController.swift */,
 				CB18E1B81BD1E5C10065B142 /* MapViewController.swift */,
+				CBAA091C1E3B1EA200E78B56 /* SettingsViewController.swift */,
 			);
 			path = Reached;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				CB18E1891BD1DCE30065B142 /* AppDelegate.swift in Sources */,
 				CB18E1B71BD1DD1E0065B142 /* EnteringViewController.swift in Sources */,
 				CB18E1B91BD1E5C10065B142 /* MapViewController.swift in Sources */,
+				CBAA091D1E3B1EA200E78B56 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

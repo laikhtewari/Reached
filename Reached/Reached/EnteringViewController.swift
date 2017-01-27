@@ -59,6 +59,21 @@ class EnteringViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if let name = UserDefaults.standard.value(forKey: "name") as? String
+        {
+            self.nameTextField.text = name
+        }
+        if let phoneNumber = UserDefaults.standard.value(forKey: "phone") as? String
+        {
+            self.phoneTextField.text = phoneNumber
+        }
+        if let address = UserDefaults.standard.value(forKey: "address") as? String
+        {
+            self.addressTextField.text = address
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "ToMap"

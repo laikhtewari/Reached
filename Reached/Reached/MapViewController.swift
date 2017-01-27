@@ -21,7 +21,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var circle: MKCircle!
     var region: CLCircularRegion!
     
-    let geofenceRadius = 75
+    var geofenceRadius = 75
     
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -66,6 +66,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //        }
         
         addressLabel.text = address
+        
+        if let radius = UserDefaults.standard.value(forKey: "radius") {
+            self.geofenceRadius = Int(radius as! Float)
+        }
 
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks: [CLPlacemark]?, error: Error?) in
